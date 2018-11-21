@@ -104,10 +104,11 @@ public class PushbotTeleopTank_Iterative extends OpMode{
     final double v3 = r * Math.sin(robotAngle) + rightX;
     final double v4 = r * Math.cos(robotAngle) - rightX;
 
-    leftFront.setPower(v1);
-    rightFront.setPower(v2);
-    leftRear.setPower(v3)
-            rightRear.setPower(v4);
+    // Why are these here???
+    // leftFront.setPower(v1);
+    // rightFront.setPower(v2);
+    // leftRear.setPower(v3);
+    // rightRear.setPower(v4);
 
     @Override
     public void loop() {
