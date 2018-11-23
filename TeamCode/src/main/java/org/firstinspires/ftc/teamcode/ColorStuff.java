@@ -33,7 +33,6 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.view.View;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
@@ -41,9 +40,6 @@ import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 import com.qualcomm.robotcore.hardware.SwitchableLight;
 
 /*
- * This is an example LinearOpMode that shows how to use a color sensor in a generic
- * way, insensitive which particular make or model of color sensor is used. The opmode
- * assumes that the color sensor is configured with a name of "color sensor".
  *
  * If the color sensor has a light which is controllable, you can use the X button on
  * the gamepad to toggle the light on and off.
@@ -52,7 +48,7 @@ import com.qualcomm.robotcore.hardware.SwitchableLight;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 @TeleOp(name = "Sensor: Color", group = "Sensor")
-@Disabled
+// @Disabled
 public class ColorStuff extends LinearOpMode {
 
   /** The colorSensor field will contain a reference to our color sensor hardware object */
@@ -95,9 +91,9 @@ public class ColorStuff extends LinearOpMode {
   }
 
   protected void runSample() throws InterruptedException {
+    float[] hsvValues = new float[3];
 
     // values is a reference to the hsvValues array.
-    float[] hsvValues = new float[3];
     final float values[] = hsvValues;
 
     // bPrevState and bCurrState keep track of the previous and current state of the button

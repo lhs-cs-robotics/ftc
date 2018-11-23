@@ -29,14 +29,8 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import android.graphics.Color;
-
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.Range;
 
 /**
  * This file provides basic Telop driving for a Pushbot robot.
@@ -74,8 +68,8 @@ public class PushbotTeleopTank_Iterative extends OpMode{
          * The init() method of the hardware class does all the work here
          */
         robot.init(hardwareMap);
-
         // Send telemetry message to signify robot waiting;
+
         telemetry.addData("Say", "Hello Driver");    //
     }
 
