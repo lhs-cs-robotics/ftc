@@ -67,10 +67,10 @@ public class PushbotTeleopTank_Iterative extends OpMode{
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
          */
+	telemetry.addData("Say", "Not dead yet");
         robot.init(hardwareMap);
         // Send telemetry message to signify robot waiting;
-
-        telemetry.addData("Say", "Hello Driver");    //
+        telemetry.addData("Say", "Hello Driver");
     }
 
     /*
@@ -108,32 +108,32 @@ public class PushbotTeleopTank_Iterative extends OpMode{
     public void loop() {
         double left;
         double right;
-/*
+	/*
         // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
         left = gamepad1.left_stick_y;
         right = gamepad1.right_stick_y;
         if(gamepad1.dpad_left)
         {
-            robot.frontLeftDrive.setPower(.4);
-            robot.frontRightDrive.setPower(-.4);
-            robot.backLeftDrive.setPower(-.6);
-            robot.backRightDrive.setPower(.6);
+	robot.frontLeftDrive.setPower(.4);
+	robot.frontRightDrive.setPower(-.4);
+	robot.backLeftDrive.setPower(-.6);
+	robot.backRightDrive.setPower(.6);
         }
         else if(gamepad1.dpad_right)
         {
-            robot.frontLeftDrive.setPower(-.4);
-            robot.frontRightDrive.setPower(.4);
-            robot.backLeftDrive.setPower(.6);
-            robot.backRightDrive.setPower(-.6);
+	robot.frontLeftDrive.setPower(-.4);
+	robot.frontRightDrive.setPower(.4);
+	robot.backLeftDrive.setPower(.6);
+	robot.backRightDrive.setPower(-.6);
         }
         else
         {
-            robot.frontLeftDrive.setPower(left);
-            robot.frontRightDrive.setPower(right);
-            robot.backLeftDrive.setPower(left);
-            robot.backRightDrive.setPower(right);
+	robot.frontLeftDrive.setPower(left);
+	robot.frontRightDrive.setPower(right);
+	robot.backLeftDrive.setPower(left);
+	robot.backRightDrive.setPower(right);
         }
-*/
+	*/
         double r = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
         double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
         double rightX = gamepad1.right_stick_x;
@@ -142,63 +142,63 @@ public class PushbotTeleopTank_Iterative extends OpMode{
         final double v3 = r * Math.sin(robotAngle) + rightX;
         final double v4 = r * Math.cos(robotAngle) - rightX;
 
-        robot.frontLeftDrive.setPower(v1);
-        robot.frontRightDrive.setPower(v2);
-        robot.backLeftDrive.setPower(v3);
-        robot.backRightDrive.setPower(v4);
+        // robot.frontLeftDrive.setPower(v1);
+        // robot.frontRightDrive.setPower(v2);
+        // robot.backLeftDrive.setPower(v3);
+        // robot.backRightDrive.setPower(v4);
 
-        if(gamepad1.right_trigger > 0)
-        {
-            robot.frontLeftDrive.setPower(-1);
-            robot.frontRightDrive.setPower(1);
-            robot.backLeftDrive.setPower(-1);
-            robot.backRightDrive.setPower(1);
-        }
-        else if(gamepad1.left_trigger > 0)
-        {
-            robot.frontLeftDrive.setPower(1);
-            robot.frontRightDrive.setPower(-1);
-            robot.backLeftDrive.setPower(1);
-            robot.backRightDrive.setPower(-1);
-        }
+        // if(gamepad1.right_trigger > 0)
+        // {
+        //     robot.frontLeftDrive.setPower(-1);
+        //     robot.frontRightDrive.setPower(1);
+        //     robot.backLeftDrive.setPower(-1);
+        //     robot.backRightDrive.setPower(1);
+        // }
+        // else if(gamepad1.left_trigger > 0)
+        // {
+        //     robot.frontLeftDrive.setPower(1);
+        //     robot.frontRightDrive.setPower(-1);
+        //     robot.backLeftDrive.setPower(1);
+        //     robot.backRightDrive.setPower(-1);
+        // }
 
 
-        // Use gamepad left & right Bumpers to open and close the claw
-        if (gamepad1.right_bumper)
-        {
-            robot.leftArm.setPosition(.9);
-            robot.rightArm.setPosition(0);
-            //clawRotationOffset -= CLAW_SPEED; //Changes servo position in code
-        }
-        else if (gamepad1.a)
-        {
-            robot.rightArm.setPosition(.9);
-            robot.leftArm.setPosition(0.2);
-            //clawRotationOffset += CLAW_SPEED;//Changes servo position in code
-        }
-        else {
-            robot.leftArm.setPosition(0.493);
-            robot.rightArm.setPosition(0.493);
-        }
+        // // Use gamepad left & right Bumpers to open and close the claw
+        // if (gamepad1.right_bumper)
+        // {
+        //     robot.leftArm.setPosition(.9);
+        //     robot.rightArm.setPosition(0);
+        //     //clawRotationOffset -= CLAW_SPEED; //Changes servo position in code
+        // }
+        // else if (gamepad1.a)
+        // {
+        //     robot.rightArm.setPosition(.9);
+        //     robot.leftArm.setPosition(0.2);
+        //     //clawRotationOffset += CLAW_SPEED;//Changes servo position in code
+        // }
+        // else {
+        //     robot.leftArm.setPosition(0.493);
+        //     robot.rightArm.setPosition(0.493);
+        // }
 
 
 
         if(gamepad1.x) {
 
             telemetry.addLine()
-                    .addData("red", robot.color.red())
-                    .addData("green", robot.color.green())
-                    .addData("blue", robot.color.blue());
+		.addData("red", robot.color.red())
+		.addData("green", robot.color.green())
+		.addData("blue", robot.color.blue());
             telemetry.addData("argb", robot.color.argb());
         }
 
-        if (gamepad1.y) {
-            robot.color.enableLed(false);
-        }
+        // if (gamepad1.y) {
+        //     robot.color.enableLed(false);
+        // }
 
-        if(gamepad1.b) {
-            robot.color.enableLed(true);
-        }
+        // if(gamepad1.b) {
+        //     robot.color.enableLed(true);
+        // }
 
 
 
