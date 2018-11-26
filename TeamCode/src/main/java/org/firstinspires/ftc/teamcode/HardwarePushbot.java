@@ -1,13 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.vuforia.ar.pl.DebugLog;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
  * This is NOT an opmode.
@@ -79,12 +76,12 @@ public class HardwarePushbot
             motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); //set motor behavior to halt when no buttons are pressed
         }
 
-        intake = hwMap.crservo.get("intake");
+        // intake = hwMap.crservo.get("intake");
 
         //clawLiftRight  = hwMap.get(Servo.class, "claw_lift_right");//Sets the name you have to use for the phone config
 
         //clawLiftLeft  = hwMap.get(Servo.class, "claw_lift_left");//Sets the name you have to use for the phone config
 
-        color = hwMap.colorSensor.get("color_sensor");
+        // color = hwMap.colorSensor.get("color_sensor");
     }
 }
