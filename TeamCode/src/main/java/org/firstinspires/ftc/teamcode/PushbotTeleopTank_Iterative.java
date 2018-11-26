@@ -47,7 +47,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="WolfBot Supreme", group="Pushbot")
+
+@TeleOp(name="Comp TeleOp", group="Pushbot")
 //@Disabled
 public class PushbotTeleopTank_Iterative extends OpMode{
 
@@ -59,6 +60,8 @@ public class PushbotTeleopTank_Iterative extends OpMode{
     //double          clawLiftOffset = -1;
     //final double    CLAW_SPEED  = 0.02 ;                 // sets rate to move servo
 
+    double contPower;
+
     /*
      * Code to run ONCE when the driver hits INIT
      */
@@ -67,10 +70,10 @@ public class PushbotTeleopTank_Iterative extends OpMode{
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
          */
-	telemetry.addData("Say", "Not dead yet");
         robot.init(hardwareMap);
+
         // Send telemetry message to signify robot waiting;
-        telemetry.addData("Say", "Hello Driver");
+        telemetry.addData("Say", "Hello Driver");    //
     }
 
     /*
@@ -87,136 +90,128 @@ public class PushbotTeleopTank_Iterative extends OpMode{
     public void start() {
     }
 
-    /*
-     * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
-     */
-    double r = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
-    double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
-    double rightX = gamepad1.right_stick_x;
-    final double v1 = r * Math.cos(robotAngle) + rightX;
-    final double v2 = r * Math.sin(robotAngle) - rightX;
-    final double v3 = r * Math.sin(robotAngle) + rightX;
-    final double v4 = r * Math.cos(robotAngle) - rightX;
 
-    // Why are these here???
-    // leftFront.setPower(v1);
-    // rightFront.setPower(v2);
-    // leftRear.setPower(v3);
-    // rightRear.setPower(v4);
 
     @Override
     public void loop() {
-        double left;
-        double right;
-	/*
+        /*double drive;   // Power for forward and back motion
+        double strafe;  // Power for left and right motion
+        double rotate;  // Power for rotating the robot
+
         // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
-        left = gamepad1.left_stick_y;
-        right = gamepad1.right_stick_y;
-        if(gamepad1.dpad_left)
+        //left = gamepad1.left_stick_y;
+        //right = gamepad1.right_stick_y;
+
+        drive = -gamepad1.left_stick_y;  // Negative because the gamepad is weird
+        strafe = gamepad1.left_stick_x;
+        rotate = gamepad1.right_stick_x;
+
+        frontLeftPower = drive + strafe + rotate;
+        backLeftPower = drive - strafe + rotate;
+        frontRightPower = drive - strafe - rotate;
+        backRightPower = drive + strafe - rotate; */
+
+        /*if(gamepad1.dpad_left)
         {
-	robot.frontLeftDrive.setPower(.4);
-	robot.frontRightDrive.setPower(-.4);
-	robot.backLeftDrive.setPower(-.6);
-	robot.backRightDrive.setPower(.6);
+            robot.frontLeftDrive.setPower(.4);
+            robot.frontRightDrive.setPower(-.4);
+            robot.backLeftDrive.setPower(-.6);
+            robot.backRightDrive.setPower(.6);
         }
         else if(gamepad1.dpad_right)
         {
-	robot.frontLeftDrive.setPower(-.4);
-	robot.frontRightDrive.setPower(.4);
-	robot.backLeftDrive.setPower(.6);
-	robot.backRightDrive.setPower(-.6);
+            robot.frontLeftDrive.setPower(-.4);
+            robot.frontRightDrive.setPower(.4);
+            robot.backLeftDrive.setPower(.6);
+            robot.backRightDrive.setPower(-.6);
         }
         else
         {
-	robot.frontLeftDrive.setPower(left);
-	robot.frontRightDrive.setPower(right);
-	robot.backLeftDrive.setPower(left);
-	robot.backRightDrive.setPower(right);
+            robot.frontLeftDrive.setPower(left);
+            robot.frontRightDrive.setPower(right);
+            robot.backLeftDrive.setPower(left);
+            robot.backRightDrive.setPower(right);
+        }*/
+
+        if(gamepad1.right_stick_x != 0 || gamepad1.right_stick_y != 0)
+        {
+            double r = Math.hypot(gamepad1.right_stick_x, gamepad1.right_stick_y);
+            double robotAngle = Math.atan2(gamepad1.right_stick_y, gamepad1.right_stick_x) - Math.PI / 4;
+            double rightX = gamepad1.right_stick_x;
+            final double v1 = r * Math.cos(robotAngle) + rightX;
+            final double v2 = r * Math.sin(robotAngle) - rightX;
+            final double v3 = r * Math.sin(robotAngle) + rightX;
+            final double v4 = r * Math.cos(robotAngle) - rightX;
+
+
+            robot.frontLeftDrive.setPower(v1);
+            robot.frontRightDrive.setPower(v2);
+            robot.backLeftDrive.setPower(v3);
+            robot.backRightDrive.setPower(v4);
         }
-	*/
-        double r = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
-        double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
-        double rightX = gamepad1.right_stick_x;
-        final double v1 = r * Math.cos(robotAngle) + rightX;
-        final double v2 = r * Math.sin(robotAngle) - rightX;
-        final double v3 = r * Math.sin(robotAngle) + rightX;
-        final double v4 = r * Math.cos(robotAngle) - rightX;
+        else if(gamepad1.right_bumper)
+        {
+            robot.frontLeftDrive.setPower(1);
+            robot.frontRightDrive.setPower(-1);
+            robot.backLeftDrive.setPower(1);
+            robot.backRightDrive.setPower(-1);
+        }
+        else if(gamepad1.left_bumper)
+        {
+            robot.frontLeftDrive.setPower(-1);
+            robot.frontRightDrive.setPower(1);
+            robot.backLeftDrive.setPower(-1);
+            robot.backRightDrive.setPower(1);
+        }
+        else
+        {
+            robot.frontLeftDrive.setPower(0);
+            robot.frontRightDrive.setPower(0);
+            robot.backLeftDrive.setPower(0);
+            robot.backRightDrive.setPower(0);
+        }
 
-        // robot.frontLeftDrive.setPower(v1);
-        // robot.frontRightDrive.setPower(v2);
-        // robot.backLeftDrive.setPower(v3);
-        // robot.backRightDrive.setPower(v4);
+        if(gamepad1.a)
+        {
+            contPower = 0;
+        }
+        else if(gamepad1.b)
+        {
+            contPower = 1;
+        } else {
+            contPower = .45;
+        }
 
-        // if(gamepad1.right_trigger > 0)
-        // {
-        //     robot.frontLeftDrive.setPower(-1);
-        //     robot.frontRightDrive.setPower(1);
-        //     robot.backLeftDrive.setPower(-1);
-        //     robot.backRightDrive.setPower(1);
-        // }
-        // else if(gamepad1.left_trigger > 0)
-        // {
-        //     robot.frontLeftDrive.setPower(1);
-        //     robot.frontRightDrive.setPower(-1);
-        //     robot.backLeftDrive.setPower(1);
-        //     robot.backRightDrive.setPower(-1);
-        // }
+        robot.intake.setPower(contPower);
 
-
-        // // Use gamepad left & right Bumpers to open and close the claw
-        // if (gamepad1.right_bumper)
-        // {
-        //     robot.leftArm.setPosition(.9);
-        //     robot.rightArm.setPosition(0);
-        //     //clawRotationOffset -= CLAW_SPEED; //Changes servo position in code
-        // }
-        // else if (gamepad1.a)
-        // {
-        //     robot.rightArm.setPosition(.9);
-        //     robot.leftArm.setPosition(0.2);
-        //     //clawRotationOffset += CLAW_SPEED;//Changes servo position in code
-        // }
-        // else {
-        //     robot.leftArm.setPosition(0.493);
-        //     robot.rightArm.setPosition(0.493);
-        // }
-
-
-
+        //arm up
         if(gamepad1.x) {
+            int position1 = robot.armBase1.getCurrentPosition();
+            int position2 = robot.armBase2.getCurrentPosition();
 
-            telemetry.addLine()
-		.addData("red", robot.color.red())
-		.addData("green", robot.color.green())
-		.addData("blue", robot.color.blue());
-            telemetry.addData("argb", robot.color.argb());
+            robot.armBase1.setTargetPosition(position1 + 10);
+            robot.armBase1.setPower(.3);
+
+                robot.armBase2.setTargetPosition(position2 + 10);
+            robot.armBase2.setPower(.3);
+        }
+        //arm down to get stuff
+        else if(gamepad1.b) {
+            int position3 = robot.armBase1.getCurrentPosition();
+            int position4 = robot.armBase2.getCurrentPosition();
+
+            robot.armBase1.setTargetPosition(position3 - 10);
+            robot.armBase1.setPower(-.3);
+
+            robot.armBase2.setTargetPosition(position4 - 10);
+            robot.armBase2.setPower(-.3);
+        }
+        else {
+            robot.armBase1.setPower(0);
+            robot.armBase2.setPower(0);
         }
 
-        // if (gamepad1.y) {
-        //     robot.color.enableLed(false);
-        // }
 
-        // if(gamepad1.b) {
-        //     robot.color.enableLed(true);
-        // }
-
-
-
-
-        //clawLiftOffset = Range.clip(clawLiftOffset, -1, 1);//Makes sure servo doesn't go past its range if it isn't continuous
-        //clawRotationOffset = Range.clip(clawRotationOffset, -1, 1);//Makes sure servo doesn't go past its range if it isn't continuous
-        //clawBarrierOffset = Range.clip(clawBarrierOffset, -1, 1);//Makes sure servo doesn't go past its range if it isn't continuous
-        //robot.clawTilt.setPosition(clawRotationOffset);//Actually physically moves servo
-        //robot.clawBarrier.setPosition(clawBarrierOffset);//Actually physically moves servo
-        //robot.clawLiftRight.setPosition(-clawLiftOffset);//Actually physically moves servo
-        //robot.clawLiftLeft.setPosition(clawLiftOffset);//Actually physically moves servo
-
-
-
-        // Send telemetry message to signify robot running;
-
-        //telemetry.addData("left",  "%.2f", left);
-        //telemetry.addData("right", "%.2f", right);
     }
 
     /*

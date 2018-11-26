@@ -1,10 +1,13 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.vuforia.ar.pl.DebugLog;
 
 /**
  * This is NOT an opmode.
@@ -26,12 +29,13 @@ public class HardwarePushbot
     public DcMotor  backLeftDrive   = null;
     public DcMotor  backRightDrive  = null;
 
-    public Servo leftArm = null;
-    public Servo rightArm= null;
+    public DcMotor armBase1 = null;
+    public DcMotor armBase2 = null;
+
+    public CRServo intake = null;
     //public Servo    clawLiftRight    = null;
     //public Servo    clawLiftLeft    = null;
     public ColorSensor color;
-
 
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
@@ -54,29 +58,28 @@ public class HardwarePushbot
         backLeftDrive  = hwMap.get(DcMotor.class, "back_left");//Sets the name you have to use for the phone config
         backRightDrive = hwMap.get(DcMotor.class, "back_right");
 
+        armBase1 = hwMap.get(DcMotor.class, "arm_base_1");
+        armBase2 = hwMap.get(DcMotor.class, "arm_base_2");
+
         frontLeftDrive.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         frontRightDrive.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         backLeftDrive.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         backRightDrive.setDirection(DcMotor.Direction.REVERSE);
 
+        armBase1.setDirection(DcMotor.Direction.FORWARD);
+        armBase2.setDirection(DcMotor.Direction.FORWARD);
+
         // Set all motors to zero power
-        frontLeftDrive.setPower(0);
-        frontRightDrive.setPower(0);
-        frontLeftDrive.setPower(0);
-        frontRightDrive.setPower(0);
+        DcMotor[] motors = new DcMotor[] {frontLeftDrive, frontRightDrive,backLeftDrive, backRightDrive,
+            armBase1, armBase2};
 
-        // Set all motors to run without encoders.
-        // May want to use RUN_USING_ENCODERS if encoders are installed.
-        frontLeftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontRightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backLeftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backRightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        for(DcMotor motor: motors) {
+            motor.setPower(0); //set all motors to zero power
+            motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER); //set all motors to run with encoders
+            motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); //set motor behavior to halt when no buttons are pressed
+        }
 
-
-        // Define and initialize ALL installed servos.
-        leftArm  = hwMap.get(Servo.class, "left_arm");//Sets the name you have to use for the phone config
-
-        rightArm  = hwMap.get(Servo.class, "right_arm");//Sets the name you have to use for the phone config
+        intake = hwMap.crservo.get("intake");
 
         //clawLiftRight  = hwMap.get(Servo.class, "claw_lift_right");//Sets the name you have to use for the phone config
 
