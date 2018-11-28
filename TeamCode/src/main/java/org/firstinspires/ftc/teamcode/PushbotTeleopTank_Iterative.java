@@ -104,13 +104,13 @@ public class PushbotTeleopTank_Iterative extends OpMode{
         right = gamepad1.left_stick_y;
 
         drive = gamepad1.left_stick_y;  // Negative because the gamepad is weird
-        strafe = gamepad1.left_stick_x;
-        rotate = gamepad1.right_stick_x;
+        // strafe = gamepad1.left_stick_x;
+        rotate = gamepad1.left_stick_x;
 
-        double frontLeftPower = drive + strafe + rotate;
-        double backLeftPower = drive - strafe + rotate;
-        double frontRightPower = drive - strafe - rotate;
-        double backRightPower = drive + strafe - rotate;
+        double frontLeftPower = drive /*+ strafe*/ + rotate;
+        double backLeftPower = drive /*- strafe*/ + rotate;
+        double frontRightPower = drive /*- strafe*/ - rotate;
+        double backRightPower = drive /*+ strafe*/ - rotate;
 
         if(gamepad1.dpad_left)
         {
