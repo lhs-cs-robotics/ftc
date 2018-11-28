@@ -128,7 +128,13 @@ public class PushbotAutoDriveByEncoder_Linear_A extends LinearOpMode {
                 .addData("g", "%.3f", colors.green)
                 .addData("b", "%.3f", colors.blue);
 
-        // TODO: use color to determine where to travel
+        /* TODO: use color to determine where to travel.
+            How this would work:
+            * While the color we're sensing _isn't_ yellow,
+              * the hsv range for yellow is:
+            * if y
+        */
+
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
         encoderDrive(DRIVE_SPEED,  13,  13, 5.0, 5.0, 10.0);  // S1: Forward 47 Inches with 5 Sec timeout
