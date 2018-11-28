@@ -55,20 +55,20 @@ public class HardwarePushbot
         backLeftDrive  = hwMap.get(DcMotor.class, "back_left");//Sets the name you have to use for the phone config
         backRightDrive = hwMap.get(DcMotor.class, "back_right");
 
-        armBase1 = hwMap.get(DcMotor.class, "arm_base_1");
-        armBase2 = hwMap.get(DcMotor.class, "arm_base_2");
+        // armBase1 = hwMap.get(DcMotor.class, "arm_base_1");
+        // armBase2 = hwMap.get(DcMotor.class, "arm_base_2");
 
         frontLeftDrive.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         frontRightDrive.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         backLeftDrive.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         backRightDrive.setDirection(DcMotor.Direction.REVERSE);
 
-        armBase1.setDirection(DcMotor.Direction.FORWARD);
-        armBase2.setDirection(DcMotor.Direction.FORWARD);
+        // armBase1.setDirection(DcMotor.Direction.FORWARD);
+        // armBase2.setDirection(DcMotor.Direction.FORWARD);
 
         // Set all motors to zero power
-        DcMotor[] motors = new DcMotor[] {frontLeftDrive, frontRightDrive,backLeftDrive, backRightDrive,
-            armBase1, armBase2};
+        DcMotor[] motors = new DcMotor[] {frontLeftDrive, frontRightDrive,backLeftDrive, backRightDrive/*,
+            armBase1, armBase2*/};
 
         for(DcMotor motor: motors) {
             motor.setPower(0); //set all motors to zero power

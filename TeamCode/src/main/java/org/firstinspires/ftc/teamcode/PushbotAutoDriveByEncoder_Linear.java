@@ -30,12 +30,8 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
-import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 
 /**
  * This file illustrates the concept of driving a path based on encoder counts.
@@ -82,11 +78,11 @@ public class PushbotAutoDriveByEncoder_Linear extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-
         /*
          * Initialize the drive system variables.
          * The init() method of the hardware class does all the work here
          */
+        /*
         robot.init(hardwareMap);
 
         // Send telemetry message to signify robot waiting;
@@ -122,6 +118,7 @@ public class PushbotAutoDriveByEncoder_Linear extends LinearOpMode {
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
+        */
     }
 
     /*
@@ -135,7 +132,7 @@ public class PushbotAutoDriveByEncoder_Linear extends LinearOpMode {
     public void encoderDrive(double speed,
                              double leftInches, double rightInches,
                              double timeoutS) {
-        int newLeftTarget;
+        /*int newLeftTarget;
         int newRightTarget;
         int newLeftTarget2;
         int newRightTarget2;
@@ -190,5 +187,6 @@ public class PushbotAutoDriveByEncoder_Linear extends LinearOpMode {
 
             //  sleep(250);   // optional pause after each move
         }
+        */
     }
 }

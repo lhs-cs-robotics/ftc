@@ -94,44 +94,63 @@ public class PushbotTeleopTank_Iterative extends OpMode{
 
     @Override
     public void loop() {
-        /*double drive;   // Power for forward and back motion
+        double drive;   // Power for forward and back motion
         double strafe;  // Power for left and right motion
         double rotate;  // Power for rotating the robot
+        double left, right;
 
         // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
-        //left = gamepad1.left_stick_y;
-        //right = gamepad1.right_stick_y;
+        left = gamepad1.left_stick_y;
+        right = gamepad1.right_stick_y;
 
         drive = -gamepad1.left_stick_y;  // Negative because the gamepad is weird
         strafe = gamepad1.left_stick_x;
         rotate = gamepad1.right_stick_x;
 
-        frontLeftPower = drive + strafe + rotate;
-        backLeftPower = drive - strafe + rotate;
-        frontRightPower = drive - strafe - rotate;
-        backRightPower = drive + strafe - rotate; */
+        double frontLeftPower = drive + strafe + rotate;
+        double backLeftPower = drive - strafe + rotate;
+        double frontRightPower = drive - strafe - rotate;
+        double backRightPower = drive + strafe - rotate;
 
-        /*if(gamepad1.dpad_left)
+        if(gamepad1.dpad_left)
         {
-            robot.frontLeftDrive.setPower(.4);
-            robot.frontRightDrive.setPower(-.4);
-            robot.backLeftDrive.setPower(-.6);
-            robot.backRightDrive.setPower(.6);
+
+            robot.frontLeftDrive.setPower(-.7);
+            robot.frontRightDrive.setPower(.3);
+            robot.backLeftDrive.setPower(.7);
+            robot.backRightDrive.setPower(-.3);
+        }
+
+        else if(gamepad1.right_bumper)
+        {
+            robot.frontLeftDrive.setPower(1);
+            robot.frontRightDrive.setPower(-1);
+            robot.backLeftDrive.setPower(1);
+            robot.backRightDrive.setPower(-1);
+        }
+        else if(gamepad1.left_bumper)
+        {
+            robot.frontLeftDrive.setPower(-1);
+            robot.frontRightDrive.setPower(1);
+            robot.backLeftDrive.setPower(-1);
+            robot.backRightDrive.setPower(1);
         }
         else if(gamepad1.dpad_right)
         {
-            robot.frontLeftDrive.setPower(-.4);
-            robot.frontRightDrive.setPower(.4);
-            robot.backLeftDrive.setPower(.6);
-            robot.backRightDrive.setPower(-.6);
+            robot.frontLeftDrive.setPower(.7);
+            robot.frontRightDrive.setPower(-.3);
+            robot.backLeftDrive.setPower(-.7);
+            robot.backRightDrive.setPower(.3);
         }
         else
         {
             robot.frontLeftDrive.setPower(left);
-            robot.frontRightDrive.setPower(right);
-            robot.backLeftDrive.setPower(left);
+            robot.frontRightDrive.setPower(left);
+            robot.backLeftDrive.setPower(right);
             robot.backRightDrive.setPower(right);
-        }*/
+        }
+
+        /*
 
         if(gamepad1.right_stick_x != 0 || gamepad1.right_stick_y != 0)
         {
@@ -185,7 +204,7 @@ public class PushbotTeleopTank_Iterative extends OpMode{
         robot.intake.setPower(contPower);
 
         //arm up
-        if(gamepad1.x) {
+   /*     if(gamepad1.x) {
             int position1 = robot.armBase1.getCurrentPosition();
             int position2 = robot.armBase2.getCurrentPosition();
 
@@ -209,7 +228,7 @@ public class PushbotTeleopTank_Iterative extends OpMode{
         else {
             robot.armBase1.setPower(0);
             robot.armBase2.setPower(0);
-        }
+        } */
 
 
     }
