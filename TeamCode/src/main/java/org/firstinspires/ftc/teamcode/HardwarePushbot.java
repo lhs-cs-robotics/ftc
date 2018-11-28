@@ -82,6 +82,6 @@ public class HardwarePushbot
 
         //clawLiftLeft  = hwMap.get(Servo.class, "claw_lift_left");//Sets the name you have to use for the phone config
 
-        // color = hwMap.colorSensor.get("color_sensor");
+        color = hwMap.colorSensor.get("color_sensor");
     }
 }
