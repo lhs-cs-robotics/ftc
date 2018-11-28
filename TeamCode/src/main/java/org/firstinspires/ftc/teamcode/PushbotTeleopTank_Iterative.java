@@ -101,9 +101,9 @@ public class PushbotTeleopTank_Iterative extends OpMode{
 
         // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
         left = gamepad1.left_stick_y;
-        right = gamepad1.right_stick_y;
+        right = gamepad1.left_stick_y;
 
-        drive = -gamepad1.left_stick_y;  // Negative because the gamepad is weird
+        drive = gamepad1.left_stick_y;  // Negative because the gamepad is weird
         strafe = gamepad1.left_stick_x;
         rotate = gamepad1.right_stick_x;
 
@@ -123,6 +123,7 @@ public class PushbotTeleopTank_Iterative extends OpMode{
 
         else if(gamepad1.right_bumper)
         {
+
             robot.frontLeftDrive.setPower(1);
             robot.frontRightDrive.setPower(-1);
             robot.backLeftDrive.setPower(1);
@@ -144,16 +145,18 @@ public class PushbotTeleopTank_Iterative extends OpMode{
         }
         else
         {
-            robot.frontLeftDrive.setPower(left);
-            robot.frontRightDrive.setPower(left);
-            robot.backLeftDrive.setPower(right);
-            robot.backRightDrive.setPower(right);
+            robot.frontLeftDrive.setPower(frontLeftPower);
+            robot.frontRightDrive.setPower(frontRightPower);
+            robot.backLeftDrive.setPower(backLeftPower);
+            robot.backRightDrive.setPower(backRightPower);
         }
 
         /*
 
         if(gamepad1.right_stick_x != 0 || gamepad1.right_stick_y != 0)
         {
+
+
             double r = Math.hypot(gamepad1.right_stick_x, gamepad1.right_stick_y);
             double robotAngle = Math.atan2(gamepad1.right_stick_y, gamepad1.right_stick_x) - Math.PI / 4;
             double rightX = gamepad1.right_stick_x;
